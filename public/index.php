@@ -37,7 +37,7 @@
                         <a class="nav-link text-white-50 fw-medium px-3" href="#about">Nosotros</a>
                     </li>
                     <li class="nav-item ms-lg-3">
-                        <a href="login.php" class="btn btn-premium btn-premium-primary px-4 py-2 rounded-pill fw-semibold shadow-sm">
+                        <a href="../views/auth/login.php" class="btn btn-premium btn-premium-primary px-4 py-2 rounded-pill fw-semibold shadow-sm">
                             <i class="bi bi-box-arrow-in-right me-2"></i>Acceso al Sistema
                         </a>
                     </li>
@@ -64,7 +64,7 @@
                         <a href="#features" class="btn btn-premium btn-premium-primary px-4 py-3 rounded-pill fw-bold shadow">
                             Ver Módulos <i class="bi bi-arrow-right ms-2"></i>
                         </a>
-                        <a href="login.php" class="btn btn-premium btn-premium-outline px-4 py-3 rounded-pill fw-semibold">
+                        <a href="../views/auth/login.php" class="btn btn-premium btn-premium-outline px-4 py-3 rounded-pill fw-semibold">
                             Demostración En Vivo
                         </a>
                     </div>
@@ -209,7 +209,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="login.php" class="btn btn-premium btn-premium-primary px-4 py-3 rounded-pill fw-bold shadow-sm">
+                    <a href="../views/auth/login.php" class="btn btn-premium btn-premium-primary px-4 py-3 rounded-pill fw-bold shadow-sm">
                         Probar Sistema Ahora
                     </a>
                 </div>
@@ -239,7 +239,7 @@
         <div class="container py-5">
             <h2 class="fw-bold display-5 mb-3">Lleva el control de tu agropecuaria al siguiente nivel</h2>
             <p class="lead mb-4 opacity-75">Únete hoy y obtén una demostración guiada sin costo por nuestro equipo técnico.</p>
-            <a href="login.php" class="btn btn-light text-success btn-lg px-5 py-3 rounded-pill fw-bold shadow-lg">
+            <a href="../views/auth/login.php" class="btn btn-light text-success btn-lg px-5 py-3 rounded-pill fw-bold shadow-lg">
                 <i class="bi bi-laptop me-2"></i>Iniciar Demostración Gratis
             </a>
         </div>
