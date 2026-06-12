@@ -11,12 +11,13 @@ class Usuario {
 
     public function registrar($usuario, $email, $password, $id_rol = 3) {
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+        $fecha_creacion = date("Y-m-d H:i:s");
         
-        $query = "INSERT INTO usuarios (usuario, email, password, id_rol) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO usuarios (usuario, email, password, id_rol, fecha_creacion) VALUES (?, ?, ?, ?, ?)";
         
         $stmt = $this->conn->prepare($query);
         if ($stmt) {
-            $stmt->bind_param("sssi", $usuario, $email, $hashed_password, $id_rol);
+            $stmt->bind_param("sssis", $usuario, $email, $hashed_password, $id_rol, $fecha_creacion);
             $result = $stmt->execute();
             $stmt->close();
             return $result;
@@ -25,7 +26,7 @@ class Usuario {
     }
 
     public function emailExiste($email) {
-        $query = "SELECT id FROM usuarios WHERE email = ?";
+        $query = "SELECT id_usuario FROM usuarios WHERE email = ?";
         $stmt = $this->conn->prepare($query);
         if ($stmt) {
             $stmt->bind_param("s", $email);
