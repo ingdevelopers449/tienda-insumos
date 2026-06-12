@@ -6,7 +6,7 @@ CREATE TABLE `roles` (
 
 CREATE TABLE `usuarios` (
   `id_usuario` int PRIMARY KEY AUTO_INCREMENT,
-  `nombre` varchar(100) NOT NULL,
+  `usuario` varchar(100) NOT NULL,
   `email` varchar(100) UNIQUE NOT NULL,
   `password` varchar(255) NOT NULL,
   `id_rol` int NOT NULL,

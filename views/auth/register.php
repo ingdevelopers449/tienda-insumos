@@ -25,13 +25,13 @@
 
         <!-- Form -->
         <form class="needs-validation" novalidate action="#" method="POST" id="registerForm">
-            <!-- Full Name -->
+            <!-- Usuario (Nombre de Usuario) -->
             <div class="mb-3">
-                <label for="name" class="form-label-premium">Nombre Completo</label>
+                <label for="usuario" class="form-label-premium">Nombre de Usuario</label>
                 <div class="input-group input-group-premium">
                     <span class="input-group-text input-group-text-premium"><i class="bi bi-person"></i></span>
-                    <input type="text" class="form-control form-control-premium" id="name" name="name" placeholder="Juan Pérez" required autocomplete="name">
-                    <div class="invalid-feedback">Por favor ingresa tu nombre completo.</div>
+                    <input type="text" class="form-control form-control-premium" id="usuario" name="usuario" placeholder="juanperez123" required autocomplete="username">
+                    <div class="invalid-feedback">Por favor ingresa tu nombre de usuario.</div>
                 </div>
             </div>
 
@@ -46,22 +46,12 @@
             </div>
 
             <!-- Password -->
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="password" class="form-label-premium">Contraseña</label>
-                    <div class="input-group input-group-premium">
-                        <span class="input-group-text input-group-text-premium"><i class="bi bi-lock"></i></span>
-                        <input type="password" class="form-control form-control-premium" id="password" name="password" placeholder="••••••••" required autocomplete="new-password" minlength="8">
-                        <div class="invalid-feedback">Debe tener al menos 8 caracteres.</div>
-                    </div>
-                </div>
-                <div class="col-md-6 mt-3 mt-md-0">
-                    <label for="confirm_password" class="form-label-premium">Confirmar Contraseña</label>
-                    <div class="input-group input-group-premium">
-                        <span class="input-group-text input-group-text-premium"><i class="bi bi-lock-fill"></i></span>
-                        <input type="password" class="form-control form-control-premium" id="confirm_password" name="confirm_password" placeholder="••••••••" required autocomplete="new-password">
-                        <div class="invalid-feedback">Las contraseñas deben coincidir.</div>
-                    </div>
+            <div class="mb-3">
+                <label for="password" class="form-label-premium">Contraseña</label>
+                <div class="input-group input-group-premium">
+                    <span class="input-group-text input-group-text-premium"><i class="bi bi-lock"></i></span>
+                    <input type="password" class="form-control form-control-premium" id="password" name="password" placeholder="••••••••" required autocomplete="new-password" minlength="8">
+                    <div class="invalid-feedback">Debe tener al menos 8 caracteres.</div>
                 </div>
             </div>
 
@@ -95,17 +85,8 @@
         (function () {
             'use strict'
             var form = document.getElementById('registerForm')
-            var password = document.getElementById('password')
-            var confirmPassword = document.getElementById('confirm_password')
 
             form.addEventListener('submit', function (event) {
-                // Custom Password matching check
-                if (password.value !== confirmPassword.value) {
-                    confirmPassword.setCustomValidity('Passwords do not match')
-                } else {
-                    confirmPassword.setCustomValidity('')
-                }
-
                 if (!form.checkValidity()) {
                     event.preventDefault()
                     event.stopPropagation()
