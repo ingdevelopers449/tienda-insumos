@@ -26,7 +26,7 @@
         </div>
 
         <!-- Form -->
-        <form class="needs-validation" novalidate action="#" method="POST" id="registerForm">
+        <form class="needs-validation" novalidate action="../../controllers/auth/registerController.php" method="POST" id="registerForm">
             <!-- Usuario (Nombre de Usuario) -->
             <div class="mb-3">
                 <label for="usuario" class="form-label-premium">Nombre de Usuario</label>
