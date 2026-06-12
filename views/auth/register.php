@@ -63,7 +63,7 @@ session_start();
                 </div>
             </div>
 
-            <!-- Terms and Conditions -->
+            <!-- Terms and Conditions -->  
             <div class="mb-4 form-check d-flex align-items-start gap-2">
                 <input type="checkbox" class="form-check-input bg-transparent border-secondary mt-1" id="terms" name="terms" required>
                 <label class="form-check-label text-secondary small" for="terms">
