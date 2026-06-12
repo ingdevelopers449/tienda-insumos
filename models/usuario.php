@@ -25,6 +25,30 @@ class Usuario {
         return false;
     }
 
+    public function obtenerPorEmail($email) {
+    // 1. Definimos la consulta con el marcador '?'
+    $sql = "SELECT * FROM usuarios WHERE email = ? LIMIT 1";
+    
+    // 2. Preparamos la consulta usando la conexión correcta ($this->conn)
+    $stmt = $this->conn->prepare($sql);
+    
+    if ($stmt === false) {
+        die("Error al preparar la consulta: " . $this->conn->error);
+    }
+
+    // 3. Vinculamos el parámetro indicando que es un String ('s')
+    $stmt->bind_param("s", $email);
+    
+    // 4. Ejecutamos la consulta sin pasarle argumentos dentro
+    $stmt->execute();
+    
+    // 5. Obtenemos el resultado de la ejecución
+    $resultado = $stmt->get_result();
+    
+    // 6. Retornamos el array asociativo (o null si el correo no existe)
+    return $resultado->fetch_assoc();
+}
+
     public function emailExiste($email) {
         $query = "SELECT id_usuario FROM usuarios WHERE email = ?";
         $stmt = $this->conn->prepare($query);

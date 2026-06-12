@@ -31,7 +31,7 @@ session_start();
         </div>
 
         <!-- Form -->
-        <form class="needs-validation" novalidate action="#" method="POST">
+        <form class="needs-validation" novalidate action="../../controllers/auth/authController.php" method="POST">
             <!-- Email -->
             <div class="mb-3">
                 <label for="email" class="form-label-premium">Correo Electrónico</label>
@@ -94,5 +94,19 @@ session_start();
                 })
         })()
     </script>
+
+    <?php if (isset($_SESSION['alert'])): ?>
+    <script>
+        Swal.fire({
+            icon: '<?php echo $_SESSION['alert']['icon']; ?>',
+            title: '<?php echo $_SESSION['alert']['title']; ?>',
+            text: '<?php echo $_SESSION['alert']['text']; ?>',
+            confirmButtonColor: '#10b981',
+            background: '#1e293b',
+            color: '#fff'
+        });
+    </script>
+    <?php unset($_SESSION['alert']); ?>
+    <?php endif; ?>
 </body>
 </html>
