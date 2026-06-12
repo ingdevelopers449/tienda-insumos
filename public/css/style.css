@@ -29,6 +29,7 @@ h1, h2, h3, h4, h5, h6, .display-4, .display-3 {
 .text-gradient {
     background: linear-gradient(135deg, #10b981 0%, #34d399 50%, #6ee7b7 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -161,6 +162,7 @@ h1, h2, h3, h4, h5, h6, .display-4, .display-3 {
     line-height: 1;
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
