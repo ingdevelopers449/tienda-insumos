@@ -4,9 +4,10 @@ AgriStock es una aplicación web moderna y premium diseñada para la gestión de
 
 ## 🚀 Características Principales
 
-- **Diseño Premium**: Interfaz moderna y adaptable construida con Bootstrap 5, fuentes personalizadas y hojas de estilo a medida.
+- **Diseño Premium**: Interfaz moderna y adaptable construida con Bootstrap 5, Bootstrap Icons, fuentes personalizadas y hojas de estilo a medida.
 - **Autenticación Completa**: Flujo seguro para el registro e inicio de sesión de usuarios.
 - **Alertas Premium**: Integración directa del framework **SweetAlert2** en los controladores para mostrar mensajes elegantes e interactivos (éxito, campos obligatorios, correos duplicados, etc.).
+- **Dashboard de Administrador**: Panel de control con métricas clave, estado de sistema interactivo, accesos rápidos responsivos, barra de navegación superior degradada y menú lateral (sidebar) premium con agrupamiento de menús y tarjeta de perfil de usuario integrada.
 - **Arquitectura MVC Limpia**: Separación clara de responsabilidades con Controladores, Modelos y Vistas en PHP.
 
 ---
@@ -24,13 +25,19 @@ El proyecto está organizado de la siguiente manera:
 ├── models/
 │   └── Usuario.php              # Modelo de Usuario (Registro, verificación de emails, etc.)
 ├── views/
-│   └── auth/
-│       ├── login.php            # Vista premium de inicio de sesión
-│       └── register.php         # Vista premium de registro de usuario
+│   ├── admin/
+│   │   └── dashboard.php        # Dashboard principal de administración
+│   ├── auth/
+│   │   ├── login.php            # Vista premium de inicio de sesión
+│   │   └── register.php         # Vista premium de registro de usuario
+│   └── layouts/
+│       ├── header.php           # Cabecera global con carga de estilos y favicon
+│       ├── footer.php           # Pie de página responsivo y scripts de Bootstrap 5
+│       └── sidebaradmin.php     # Menú lateral premium responsivo con perfil de usuario
 ├── public/
 │   ├── index.php                # Landing page principal
 │   └── css/
-│       └── style.css            # Estilos CSS personalizados
+│       └── style.css            # Estilos CSS personalizados (AgriStock Premium)
 ├── sql/
 │   └── bdtienda.sql             # Script de base de datos
 └── Documentacion Logica.md/     # Documentación técnica interna

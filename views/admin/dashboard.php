@@ -132,7 +132,7 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
                             <span class="rounded-circle bg-success d-inline-block" style="width: 10px; height: 10px; box-shadow: 0 0 8px var(--primary-glow);"></span>
                             <span class="fw-semibold text-dark small">Base de Datos</span>
                         </div>
-                        <span class="badge bg-success-subtle text-success border border-success border-opacity-10 fw-bold px-2.5 py-1.5" style="font-size: 0.75rem;">CONECTADO</span>
+                        <span class="badge bg-success-subtle text-success border border-success border-opacity-10 fw-bold px-2.5 py-1.5" style="font-size: 0.75rem;">CONECTADO SIN CONTROL</span>
                     </div>
                     <div class="d-flex align-items-center justify-content-between p-3 bg-light rounded-3">
                         <div class="d-flex align-items-center gap-3">
