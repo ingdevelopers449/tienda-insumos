@@ -52,7 +52,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     }
 </style>
 
-<aside class="flex-shrink-0 bg-white border-end d-flex flex-column" style="width: 260px; min-width: 260px; box-shadow: 10px 0 30px rgba(0,0,0,0.015);">
+<aside class="flex-shrink-0 bg-white border-end d-flex flex-column position-sticky top-0 vh-100" style="width: 260px; min-width: 260px; box-shadow: 10px 0 30px rgba(0,0,0,0.015);">
     <!-- Brand Logo Section -->
     <div class="d-flex align-items-center gap-3 px-4 border-bottom" style="height: 90px;">
         <div class="bg-success bg-opacity-10 text-success rounded-3 d-flex align-items-center justify-content-center border border-success border-opacity-10" style="width: 42px; height: 42px; min-width: 42px;">
@@ -76,7 +76,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             </a>
 
             <div class="text-uppercase fw-bold menu-header">Gestión</div>
-            <a href="usuarios.php" class="sidebar-link d-flex align-items-center gap-3 text-decoration-none mb-1 <?= $currentPage == 'usuarios.php' ? 'active' : '' ?>">
+            <a href="../admin/gusuarios.php" class="sidebar-link d-flex align-items-center gap-3 text-decoration-none mb-1 <?= $currentPage == 'gusuarios.php' ? 'active' : '' ?>">
                 <i class="bi bi-people"></i>
                 <span>Gestión Usuarios</span>
             </a>
@@ -142,17 +142,17 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     </div>
 </aside>
 
-<main class="flex-grow-1 d-flex flex-column bg-light min-vh-100">
-    <header class="d-flex align-items-center justify-content-between px-4 px-lg-5 text-white shadow-sm" style="height: 90px; background: linear-gradient(135deg, #0b0f19 0%, #1e293b 100%); border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+<main class="flex-grow-1 d-flex flex-column bg-light min-vh-100" style="min-width: 0;">
+    <header class="d-flex align-items-center justify-content-between px-4 px-lg-5 text-white shadow-sm position-sticky top-0" style="height: 90px; background: linear-gradient(135deg, #0b0f19 0%, #1e293b 100%); border-bottom: 1px solid rgba(255, 255, 255, 0.08); z-index: 1020;">
         <h1 class="h3 mb-0 fw-light" style="font-family: var(--font-heading);"><?= htmlspecialchars($titulo) ?></h1>
 
-        <div class="d-flex align-items-center gap-3">
-            <div class="rounded-circle d-flex align-items-center justify-content-center bg-success bg-opacity-10 text-success border border-success border-opacity-20" style="width: 42px; height: 42px;">
-                <i class="bi bi-person-circle fs-5"></i>
-            </div>
+        <div class="d-flex align-items-center gap-3 pe-2 pe-md-4">
             <div class="text-end">
-                <div class="fw-bold small text-white leading-tight mb-0"><?= htmlspecialchars(ucfirst($rol_nombre)) ?></div>
-                <div class="text-secondary small" style="font-size: 0.75rem;"><?= htmlspecialchars($nombreCompleto) ?></div>
+                <div class="fw-bold text-white mb-0" style="font-size: 0.95rem; line-height: 1.2; font-family: var(--font-heading);"><?= htmlspecialchars(ucfirst($rol_nombre)) ?></div>
+                <div class="text-secondary" style="font-size: 0.85rem; opacity: 0.8;"><?= htmlspecialchars($nombreCompleto) ?></div>
+            </div>
+            <div class="rounded-circle d-flex align-items-center justify-content-center bg-success bg-opacity-10 text-success border border-success border-opacity-20" style="width: 46px; height: 46px;">
+                <i class="fa-solid fa-circle-user fs-3"></i>
             </div>
         </div>
     </header>
