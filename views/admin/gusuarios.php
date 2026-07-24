@@ -8,6 +8,7 @@ if (!isset($_SESSION['usuario']) || ($_SESSION['usuario']['id_rol'] != 1 && $_SE
 
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../models/Usuario.php';
+require_once __DIR__ . '/../config/database.php';
 
 $usuarioModel = new Usuario();
 $usuarios = $usuarioModel->obtenerTodos();
