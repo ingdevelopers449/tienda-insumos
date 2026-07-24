@@ -37,31 +37,33 @@ function mostrarAlerta($type, $title, $text, $redirectUrl) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usuario_str = $_POST['usuario'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
-    $terminos = $_POST['terminos'] ?? '';
+    $nombres = trim($_POST['nombres'] ?? '');
+    $apellidos = trim($_POST['apellidos'] ?? '');
+    $usuario_str = trim($nombres . ' ' . $apellidos);
+    $email = trim($_POST['email'] ?? '');
+    $password = trim($_POST['password'] ?? '');
+    $rol = $_POST['rol'] ?? '';
+    $estado = $_POST['estado'] ?? '';
 
-    if (empty($usuario_str) || empty($email) || empty($password)) {
-        mostrarAlerta('error', 'Campos obligatorios', 'Todos los campos son obligatorios.', '../../views/auth/register.php');
+    if (empty($usuario_str) || empty($email) || empty($password) || empty($rol) || empty($estado)) {
+        mostrarAlerta('error', 'Campos obligatorios', 'Todos los campos son obligatorios.', '../views/admin/gusuarios.php');
     }
 
     $usuarioModel = new Usuario();
 
     if ($usuarioModel->emailExiste($email)) {
-        mostrarAlerta('error', 'Correo registrado', 'El email ya está registrado.', '../../views/auth/register.php');
+        mostrarAlerta('error', 'Correo registrado', 'El email ya está registrado.', '../views/admin/gusuarios.php');
     }
 
-    // 3 = Cliente
-    $registrado = $usuarioModel->registrar($usuario_str, $email, $password, 3);
+    $registrado = $usuarioModel->registrar($usuario_str, $email, $password, $rol, $estado);
 
     if ($registrado) {
-        mostrarAlerta('success', '¡Registro Exitoso!', 'Cuenta creada exitosamente. Puedes iniciar sesión.', '../views/admin/gusuarios.php');
+        mostrarAlerta('success', '¡Registro Exitoso!', 'Cuenta creada exitosamente.', '../views/admin/gusuarios.php');
     } else {
-        mostrarAlerta('error', 'Error de registro', 'Hubo un error al registrar. Verifica tu conexión o intenta más tarde.', '../../views/auth/register.php');
+        mostrarAlerta('error', 'Error de registro', 'Hubo un error al registrar. Verifica tu conexión o intenta más tarde.', '../views/admin/gusuarios.php');
     }
 } else {
-    header("Location: ../../views/auth/register.php");
+    header("Location: ../views/admin/gusuarios.php");
     exit();
 }
 ?>

@@ -15,7 +15,7 @@ class Usuario
     {
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
-        $query = 'INSERT INTO usuarios (usuario, email, password, id_rol, estado) VALUES (?, ?, ?, ?, ?)';
+        $query = 'INSERT INTO usuarios (usuario, email, password, id_rol, estado, fecha_creacion) VALUES (?, ?, ?, ?, ?, NOW())';
 
         $stmt = $this->conn->prepare($query);
         if ($stmt) {
