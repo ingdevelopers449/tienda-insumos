@@ -29,9 +29,8 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
                         </h2>
                         <p class="text-muted small mb-0">Administra las cuentas de usuario y sus privilegios de acceso al sistema.</p>
                     </div>
-                    <button class="btn btn-premium btn-premium-primary d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#modalCrear">
-                        <i class="fa-solid fa-user-plus"></i>
-                        <span>Agregar Usuario</span>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrear">
+                        Agregar Usuario
                     </button>
                 </div>
 
@@ -61,7 +60,6 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
                                 <th class="border-0 px-4 py-3 text-muted small fw-bold text-uppercase">Email</th>
                                 <th class="border-0 px-4 py-3 text-muted small fw-bold text-uppercase">Rol</th>
                                 <th class="border-0 px-4 py-3 text-muted small fw-bold text-uppercase">Estado</th>
-                                <th class="border-0 px-4 py-3 text-muted small fw-bold text-uppercase text-center">Vincular</th>
                                 <th class="border-0 px-4 py-3 text-muted small fw-bold text-uppercase text-center">Editar</th>
                                 <th class="border-0 px-4 py-3 text-muted small fw-bold text-uppercase text-center">Eliminar</th>
                             </tr>
@@ -87,15 +85,12 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
                                     if ($usuario['id_rol'] == 'administrador' || $usuario['id_rol'] == '1') { 
                                         $rol_badge = 'bg-danger bg-opacity-10 text-danger border border-danger border-opacity-10'; 
                                         $rol_name = 'Administrador'; 
-                                    } elseif ($usuario['id_rol'] == 'docente' || $usuario['id_rol'] == '2') { 
+                                    } elseif ($usuario['id_rol'] == 'vendedor' || $usuario['id_rol'] == '2') { 
                                         $rol_badge = 'bg-primary bg-opacity-10 text-primary border border-primary border-opacity-10'; 
-                                        $rol_name = 'Docente'; 
-                                    } elseif ($usuario['id_rol'] == 'estudiante' || $usuario['id_rol'] == '3') { 
+                                        $rol_name = 'Vendedor'; 
+                                    } elseif ($usuario['id_rol'] == 'cliente' || $usuario['id_rol'] == '3') { 
                                         $rol_badge = 'bg-success bg-opacity-10 text-success border border-success border-opacity-10'; 
-                                        $rol_name = 'Estudiante'; 
-                                    } elseif ($usuario['id_rol'] == 'acudiente' || $usuario['id_rol'] == '4') { 
-                                        $rol_badge = 'bg-warning bg-opacity-10 text-warning border border-warning border-opacity-10'; 
-                                        $rol_name = 'Acudiente'; 
+                                        $rol_name = 'Cliente'; 
                                     }
                                     ?>
                                     <span class="badge px-2.5 py-1.5 fw-bold <?= $rol_badge ?>" style="font-size: 0.75rem;"><?= $rol_name ?></span>
@@ -108,16 +103,7 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
                                     <?php endif; ?>
                                 </td>
                                 <td class="px-4 py-3 text-center">
-                                    <?php if ($usuario['id_rol'] == 'acudiente' || $usuario['id_rol'] == '4'): ?>
-                                        <button type="button" class="btn btn-outline-primary btn-sm rounded-circle d-flex align-items-center justify-content-center border-0 mx-auto" onclick="openVincularModal(<?= $usuario['id_usuario'] ?>, '<?= htmlspecialchars($usuario['usuario']) ?>')" style="width: 35px; height: 35px;" title="Vincular Estudiante">
-                                            <i class="fa-solid fa-link"></i>
-                                        </button>
-                                    <?php else: ?>
-                                        <span class="text-muted small">-</span>
-                                    <?php endif; ?>
-                                </td>
-                                <td class="px-4 py-3 text-center">
-                                    <button type="button" onclick='openEditModal(<?= json_encode($usuario) ?>)' class="btn btn-outline-success btn-sm rounded-circle d-flex align-items-center justify-content-center border-0 mx-auto" style="width: 35px; height: 35px;" title="Editar">
+                                    <button type="button" onclick='openEditModal(<?= htmlspecialchars(json_encode($usuario), ENT_QUOTES, "UTF-8") ?>)' class="btn btn-outline-success btn-sm rounded-circle d-flex align-items-center justify-content-center border-0 mx-auto" style="width: 35px; height: 35px;" title="Editar">
                                         <i class="fa-solid fa-pen"></i>
                                     </button>
                                 </td>
@@ -226,118 +212,18 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
                         <label class="form-label text-secondary small fw-bold">Rol *</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-user-shield"></i></span>
-                            <select name="rol" id="rolSelect" required onchange="toggleExtraFields(this.value)" class="form-select bg-white">
+                            <select name="rol" id="rolSelect" required class="form-select bg-white">
                                 <option value="">Seleccione un rol...</option>
-                                <option value="administrador">Administrador</option>
-                                <option value="docente">Docente</option>
-                                <option value="estudiante">Estudiante</option>
-                                <option value="acudiente">Acudiente</option>
+                                <option value="1">Administrador</option>
+                                <option value="2">Vendedor</option>
+                                <option value="3">Cliente</option>
                             </select>
-                        </div>
-                    </div>
-
-                    <!-- Campos extra para Estudiantes -->
-                    <div id="estudianteFields" class="d-none pt-3 border-t">
-                        <div class="row g-3">
-                            <div class="col-12 col-md-6">
-                                <label class="form-label text-secondary small fw-bold">Código Estudiantil *</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-id-card"></i></span>
-                                    <input type="text" name="codigo_estudiantil" class="form-control" placeholder="Ej: EST12345">
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <label class="form-label text-secondary small fw-bold">Grado Actual</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-graduation-cap"></i></span>
-                                    <input type="number" name="grado_actual" class="form-control" placeholder="Ej: 10">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3">
-                            <label class="form-label text-secondary small fw-bold">Fecha de Nacimiento</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-calendar-days"></i></span>
-                                <input type="date" name="fecha_nacimiento" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Campos extra para Acudientes -->
-                    <div id="acudienteFields" class="d-none pt-3 border-t">
-                        <div>
-                            <label class="form-label text-secondary small fw-bold">Teléfono / Celular *</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-phone"></i></span>
-                                <input type="text" name="telefono" class="form-control" placeholder="Ej: 3001234567">
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer border-top border-light p-4">
                     <button type="button" class="btn btn-light rounded-3" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-premium btn-premium-primary">Guardar Usuario</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Vincular Acudiente-Estudiante -->
-<div class="modal fade" id="modalVincular" tabindex="-1" aria-labelledby="modalVincularLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 rounded-4 shadow-lg">
-            <div class="modal-header border-bottom border-light p-4">
-                <h5 class="modal-title fw-bold text-dark mb-0" id="modalVincularLabel" style="font-family: var(--font-heading);">
-                    <i class="fa-solid fa-link text-primary me-2"></i>Vincular Estudiante
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="../../controllers/AdminUsuarioController.php?accion=vincular_acudiente" method="POST" class="needs-validation" novalidate>
-                <div class="modal-body p-4 d-flex flex-column gap-3">
-                    <input type="hidden" name="id_usuario_acudiente" id="vincular_id_usuario">
-                    <div>
-                        <label class="form-label text-secondary small fw-bold">Acudiente</label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-user-tag"></i></span>
-                            <input type="text" id="vincular_nombre_acudiente" readonly class="form-control bg-light cursor-not-allowed text-muted">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="form-label text-secondary small fw-bold">Seleccionar Estudiante</label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-user-graduate"></i></span>
-                            <select name="id_estudiante" required class="form-select bg-white">
-                                <option value="">Seleccione un estudiante...</option>
-                                <?php
-                                $db_v = (new Database())->conectar();
-                                $stmt_v = $db_v->prepare('SELECT e.id_estudiante, u.nombres, u.apellidos FROM estudiantes e JOIN usuarios u ON e.id_usuario = u.id_usuario ORDER BY u.apellidos');
-                                $stmt_v->execute();
-                                $estudiantes_v = $stmt_v->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($estudiantes_v as $ev):
-                                    ?>
-                                    <option value="<?= $ev['id_estudiante'] ?>"><?= htmlspecialchars($ev['apellidos'] . ' ' . $ev['nombres']) ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="form-label text-secondary small fw-bold">Parentesco</label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-people-arrows"></i></span>
-                            <select name="parentesco" required class="form-select bg-white">
-                                <option value="Padre">Padre</option>
-                                <option value="Madre">Madre</option>
-                                <option value="Tutor">Tutor</option>
-                                <option value="Abuelo/a">Abuelo/a</option>
-                                <option value="Otro">Otro</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer border-top border-light p-4">
-                    <button type="button" class="btn btn-light rounded-3" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary px-4 py-2">Vincular</button>
                 </div>
             </form>
         </div>
@@ -391,49 +277,11 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
                         <label class="form-label text-secondary small fw-bold">Rol *</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-user-shield"></i></span>
-                            <select name="rol" id="edit_rol" required onchange="toggleExtraFieldsEdit(this.value)" class="form-select bg-white">
-                                <option value="administrador">Administrador</option>
-                                <option value="docente">Docente</option>
-                                <option value="estudiante">Estudiante</option>
-                                <option value="acudiente">Acudiente</option>
+                            <select name="rol" id="edit_rol" required class="form-select bg-white">
+                                <option value="1">Administrador</option>
+                                <option value="2">Vendedor</option>
+                                <option value="3">Cliente</option>
                             </select>
-                        </div>
-                    </div>
-
-                    <!-- Campos extra para Edición -->
-                    <div id="estudianteFieldsEdit" class="d-none pt-3 border-t">
-                        <div class="row g-3">
-                            <div class="col-12 col-md-6">
-                                <label class="form-label text-secondary small fw-bold">Código Estudiantil *</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-id-card"></i></span>
-                                    <input type="text" name="codigo_estudiantil" id="edit_codigo_estudiantil" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <label class="form-label text-secondary small fw-bold">Grado Actual</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-graduation-cap"></i></span>
-                                    <input type="number" name="grado_actual" id="edit_grado_actual" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3">
-                            <label class="form-label text-secondary small fw-bold">Fecha de Nacimiento</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-calendar-days"></i></span>
-                                <input type="date" name="fecha_nacimiento" id="edit_fecha_nacimiento" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="acudienteFieldsEdit" class="d-none pt-3 border-t">
-                        <div>
-                            <label class="form-label text-secondary small fw-bold">Teléfono / Celular *</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-phone"></i></span>
-                                <input type="text" name="telefono" id="edit_telefono" class="form-control">
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -468,52 +316,15 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
 </div>
 
 <script>
-    function toggleExtraFields(rol, mode = '') {
-        const estFields = document.getElementById('estudianteFields' + mode);
-        const acuFields = document.getElementById('acudienteFields' + mode);
-        
-        if (estFields) estFields.classList.add('d-none');
-        if (acuFields) acuFields.classList.add('d-none');
-        
-        if (rol === 'estudiante' && estFields) {
-            estFields.classList.remove('d-none');
-        } else if (rol === 'acudiente' && acuFields) {
-            acuFields.classList.remove('d-none');
-        }
-    }
-
-    function toggleExtraFieldsEdit(rol) {
-        toggleExtraFields(rol, 'Edit');
-    }
-
     function openEditModal(usuario) {
         document.getElementById('edit_id_usuario').value = usuario.id_usuario;
         document.getElementById('edit_nombres').value = usuario.nombres || '';
         document.getElementById('edit_apellidos').value = usuario.apellidos || '';
         document.getElementById('edit_email').value = usuario.email;
-        document.getElementById('edit_rol').value = usuario.rol || usuario.id_rol;
-        
-        // Cargar campos extra
-        if (usuario.rol === 'estudiante' || usuario.id_rol === 'estudiante') {
-            document.getElementById('edit_codigo_estudiantil').value = usuario.codigo_estudiantil || '';
-            document.getElementById('edit_grado_actual').value = usuario.grado_actual || '';
-            document.getElementById('edit_fecha_nacimiento').value = usuario.fecha_nacimiento || '';
-        } else if (usuario.rol === 'acudiente' || usuario.id_rol === 'acudiente') {
-            document.getElementById('edit_telefono').value = usuario.telefono || '';
-        }
-        
-        toggleExtraFieldsEdit(usuario.rol || usuario.id_rol);
+        document.getElementById('edit_rol').value = usuario.id_rol;
         
         var editModal = new bootstrap.Modal(document.getElementById('modalEditar'));
         editModal.show();
-    }
-
-    function openVincularModal(id, nombre) {
-        document.getElementById('vincular_id_usuario').value = id;
-        document.getElementById('vincular_nombre_acudiente').value = nombre;
-        
-        var vincularModal = new bootstrap.Modal(document.getElementById('modalVincular'));
-        vincularModal.show();
     }
 
     // Validación Bootstrap
@@ -548,7 +359,7 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
             responsive: true,
             pageLength: 10,
             columnDefs: [
-                { orderable: false, targets: [5, 6, 7] }
+                { orderable: false, targets: [5, 6] }
             ]
         });
 
