@@ -17,16 +17,22 @@ AgriStock es una aplicación web moderna y premium diseñada para la gestión de
 El proyecto está organizado de la siguiente manera:
 
 ```text
+├── .agents/
+│   └── AGENTS.md                # Reglas y contexto del proyecto para agentes de IA (Oculto)
 ├── config/
 │   └── database.php             # Configuración y conexión a la base de datos (MySQLi)
 ├── controllers/
-│   └── auth/
-│       └── registerController.php # Controlador de registro con alertas SweetAlert2
+│   ├── auth/
+│   │   ├── authController.php     # Controlador de inicio y cierre de sesión
+│   │   └── registerController.php # Controlador de registro público
+│   └── registerControllerAdmin.php # Controlador de registro desde el panel de admin
 ├── models/
-│   └── Usuario.php              # Modelo de Usuario (Registro, verificación de emails, etc.)
+│   ├── Usuario.php              # Modelo de Usuario (Registro, estados, roles, etc.)
+│   └── rol.php                  # Modelo de Rol (Obtención de roles de la DB)
 ├── views/
 │   ├── admin/
-│   │   └── dashboard.php        # Dashboard principal de administración
+│   │   ├── dashboard.php        # Dashboard principal de administración
+│   │   └── gusuarios.php        # Interfaz de gestión de usuarios
 │   ├── auth/
 │   │   ├── login.php            # Vista premium de inicio de sesión
 │   │   └── register.php         # Vista premium de registro de usuario
@@ -45,23 +51,33 @@ El proyecto está organizado de la siguiente manera:
 
 ---
 
-## 🛠️ Requisitos e Instalación
+## 🛠️ Requisitos e Instalación en Laragon
 
 ### 1. Requisitos Previos
-* Servidor Web (por ejemplo, **Laragon**, **XAMPP** o **WampServer**) con soporte para:
-  * **PHP 7.4** o superior.
-  * Servidor de Base de Datos **MySQL/MariaDB**.
+* Tener instalado **Laragon** en tu equipo.
+* PHP 7.4 o superior habilitado en Laragon.
+* MySQL habilitado en Laragon.
 
-### 2. Configuración de la Base de Datos
-1. Inicia tu servidor MySQL.
-2. Crea una base de datos llamada `tiendadb` (o el nombre especificado en tu archivo de configuración).
-3. Importa el archivo SQL ubicado en `sql/bdtienda.sql` a tu base de datos:
-   ```bash
-   mysql -u tu_usuario -p tiendadb < sql/bdtienda.sql
+### 2. Configuración del Proyecto en Laragon
+1. Clona o mueve la carpeta del proyecto `tienda` dentro del directorio raíz de Laragon:
+   ```text
+   C:\laragon\www\tienda
    ```
+2. Inicia todos los servicios en Laragon haciendo clic en **"Iniciar Todo"** (*Start All*).
+3. Laragon creará y configurará automáticamente el host virtual local accesible desde:
+   * **http://localhost/tienda**  o  **http://tienda.test**
 
-### 3. Configuración de Conexión en PHP
-Abre el archivo [database.php](file:///c:/laragon/www/tienda/config/database.php) y configura las credenciales de tu base de datos local:
+### 3. Configuración de la Base de Datos
+1. Abre la base de datos haciendo clic en **"Base de Datos"** (*Database*) en Laragon (esto abrirá HeidiSQL por defecto).
+2. Crea una nueva base de datos llamada `tiendadb`.
+3. Haz clic derecho sobre `tiendadb`, selecciona **Cargar archivo SQL...** y selecciona el archivo ubicado en:
+   ```text
+   C:\laragon\www\tienda\sql\bdtienda.sql
+   ```
+4. Ejecuta el archivo SQL para crear las tablas e insertar los datos iniciales.
+
+### 4. Configuración de Conexión en PHP
+Abre el archivo [database.php](file:///c:/laragon/www/tienda/config/database.php) y verifica que las credenciales de conexión coincidan con las de Laragon (por defecto el usuario de MySQL es `root` y no tiene contraseña):
 ```php
 $host = "127.0.0.1";
 $user = "root";
@@ -72,14 +88,15 @@ $port = 3306;
 
 ---
 
-## 💻 Flujo de Registro y Alertas
+## 📝 Historial de Cambios y Agregados Recientes
 
-El flujo de registro está diseñado para interactuar con el usuario mediante **SweetAlert2** directamente procesado desde el controlador:
-
-1. El usuario envía el formulario desde [register.php](file:///c:/laragon/www/tienda/views/auth/register.php).
-2. El controlador [registerController.php](file:///c:/laragon/www/tienda/controllers/auth/registerController.php) recibe los datos por método `POST`.
-3. El controlador valida la información:
-   - Si existen campos vacíos o si el correo ya está registrado en el modelo [Usuario.php](file:///c:/laragon/www/tienda/models/Usuario.php), se genera una alerta SweetAlert2 de tipo `error` con fondo oscuro premium y se redirige de vuelta al registro al pulsar "OK".
-   - Si la cuenta se crea exitosamente, se muestra la alerta SweetAlert2 de tipo `success` y se redirige a [login.php](file:///c:/laragon/www/tienda/views/auth/login.php).
-
-*Para más detalles sobre la lógica del código, consulta el archivo [registro.md](file:///c:/laragon/www/tienda/Documentacion%20Logica.md/auth/registro.md).*
+- **Modelo Rol Añadido (`models/rol.php`)**: Se creó el modelo `Rol` para consultar dinámicamente los roles disponibles en la tabla `roles` en lugar de cargarlos de forma estática en la vista.
+- **Gestión de Usuarios Optimizada (`views/admin/gusuarios.php`)**:
+  - Se conectaron correctamente los botones de **Agregar** y **Editar** usuario a sus respectivos modales de Bootstrap 5.
+  - Se eliminó el código obsoleto escolar (*estudiantes, acudientes, asignaturas*) que generaba errores de ejecución fatal en PHP.
+  - Se integró la carga de roles y estados directamente desde la base de datos a través de los modelos.
+  - Se corrigió el selector del DataTable para adaptarlo a la nueva estructura de columnas sin la columna "Vincular".
+- **Controlador Administrativo Creado (`controllers/registerControllerAdmin.php`)**: Se añadió este controlador para procesar de forma correcta la creación de nuevos usuarios desde el panel del Administrador, combinando los campos nombres/apellidos en una sola columna y redirigiendo de vuelta a `gusuarios.php` mediante alertas de **SweetAlert2**.
+- **Registro de Fecha Automático**: El modelo `Usuario::registrar()` ahora ingresa automáticamente la fecha y hora de creación utilizando `NOW()` en la base de datos.
+- **Gestión de Estados en Texto (VARCHAR)**: Se migró la columna `estado` en la base de datos y la lógica en PHP para almacenar de forma explícita `"Activo"` o `"Inactivo"`, actualizando la parametrización de variables en las consultas (`bind_param` de tipo string `'s'`).
+- **Contexto para Agentes (`.agents/AGENTS.md`)**: Se creó una carpeta oculta con directrices y reglas del proyecto para agilizar el trabajo de futuros agentes de IA y reducir el consumo de tokens.
