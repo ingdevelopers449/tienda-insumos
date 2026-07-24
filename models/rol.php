@@ -13,7 +13,7 @@ class Rol
 
     public function obtenerTodos()
     {
-        $query = 'SELECT id_rol, rol FROM roles';
+        $query = 'SELECT id_rol, nombre AS rol FROM roles';
         $result = $this->conn->query($query);
         $roles = [];
         if ($result && $result->num_rows > 0) {

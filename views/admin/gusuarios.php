@@ -8,10 +8,13 @@ if (!isset($_SESSION['usuario']) || ($_SESSION['usuario']['id_rol'] != 1 && $_SE
 
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../models/Usuario.php';
-require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../../models/rol.php';
 
 $usuarioModel = new Usuario();
 $usuarios = $usuarioModel->obtenerTodos();
+
+$rolModel = new Rol();
+$roles = $rolModel->obtenerTodos();
 
 $titulo = 'Gestión de Usuarios';
 require_once __DIR__ . '/../layouts/header.php';
@@ -215,9 +218,9 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
                             <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-user-shield"></i></span>
                             <select name="rol" id="rolSelect" required class="form-select bg-white">
                                 <option value="">Seleccione un rol...</option>
-                                <option value="1">Administrador</option>
-                                <option value="2">Vendedor</option>
-                                <option value="3">Cliente</option>
+                                <?php foreach ($roles as $rol): ?>
+                                    <option value="<?= htmlspecialchars($rol['id_rol']) ?>"><?= htmlspecialchars($rol['rol']) ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
@@ -279,9 +282,10 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
                         <div class="input-group">
                             <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-user-shield"></i></span>
                             <select name="rol" id="edit_rol" required class="form-select bg-white">
-                                <option value="1">Administrador</option>
-                                <option value="2">Vendedor</option>
-                                <option value="3">Cliente</option>
+                                <option value="">Seleccione un rol...</option>
+                                <?php foreach ($roles as $rol): ?>
+                                    <option value="<?= htmlspecialchars($rol['id_rol']) ?>"><?= htmlspecialchars($rol['rol']) ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
