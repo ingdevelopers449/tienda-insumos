@@ -56,7 +56,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <!-- Brand Logo Section -->
     <div class="d-flex align-items-center gap-3 px-4 border-bottom" style="height: 90px;">
         <div class="bg-success bg-opacity-10 text-success rounded-3 d-flex align-items-center justify-content-center border border-success border-opacity-10" style="width: 42px; height: 42px; min-width: 42px;">
-            <i class="bi bi-patch-check-fill fs-4"></i>
+            <i class="fa-solid fa-circle-check fs-4"></i>
         </div>
         <div>
             <div class="fw-extrabold text-dark m-0 fs-5" style="font-family: var(--font-heading); letter-spacing: -0.5px; font-weight: 800; line-height: 1.2;">
@@ -71,25 +71,25 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <?php if ($id_rol === '1' || $id_rol === 1): ?>
             <div class="text-uppercase fw-bold menu-header">Inicio</div>
             <a href="dashboard.php" class="sidebar-link d-flex align-items-center gap-3 text-decoration-none mb-1 <?= $currentPage == 'dashboard.php' ? 'active' : '' ?>">
-                <i class="bi bi-speedometer2"></i>
+                <i class="fa-solid fa-gauge-high"></i>
                 <span>Dashboard</span>
             </a>
 
             <div class="text-uppercase fw-bold menu-header">Gestión</div>
             <a href="../admin/gusuarios.php" class="sidebar-link d-flex align-items-center gap-3 text-decoration-none mb-1 <?= $currentPage == 'gusuarios.php' ? 'active' : '' ?>">
-                <i class="bi bi-people"></i>
+                <i class="fa-solid fa-users"></i>
                 <span>Gestión Usuarios</span>
             </a>
             <a href="proveedores.php" class="sidebar-link d-flex align-items-center gap-3 text-decoration-none mb-1 <?= $currentPage == 'proveedores.php' ? 'active' : '' ?>">
-                <i class="bi bi-truck"></i>
+                <i class="fa-solid fa-truck-fast"></i>
                 <span>Proveedores</span>
             </a>
             <a href="categorias.php" class="sidebar-link d-flex align-items-center gap-3 text-decoration-none mb-1 <?= $currentPage == 'categorias.php' ? 'active' : '' ?>">
-                <i class="bi bi-tags"></i>
+                <i class="fa-solid fa-tags"></i>
                 <span>Categorías</span>
             </a>
             <a href="productos.php" class="sidebar-link d-flex align-items-center gap-3 text-decoration-none mb-1 <?= $currentPage == 'productos.php' ? 'active' : '' ?>">
-                <i class="bi bi-box-seam"></i>
+                <i class="fa-solid fa-box"></i>
                 <span>Productos</span>
             </a>
         <?php endif; ?>
@@ -97,17 +97,17 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <?php if ($id_rol === '2' || $id_rol === 2): ?>
             <div class="text-uppercase fw-bold menu-header">Inicio</div>
             <a href="../vendedor/dashboard.php" class="sidebar-link d-flex align-items-center gap-3 text-decoration-none mb-1 <?= $currentPage == 'dashboard.php' ? 'active' : '' ?>">
-                <i class="bi bi-speedometer2"></i>
+                <i class="fa-solid fa-gauge-high"></i>
                 <span>Dashboard</span>
             </a>
 
             <div class="text-uppercase fw-bold menu-header">Operaciones</div>
             <a href="../vendedor/ventas.php" class="sidebar-link d-flex align-items-center gap-3 text-decoration-none mb-1 <?= $currentPage == 'ventas.php' ? 'active' : '' ?>">
-                <i class="bi bi-cart"></i>
+                <i class="fa-solid fa-shopping-cart"></i>
                 <span>Ventas</span>
             </a>
             <a href="../vendedor/productos.php" class="sidebar-link d-flex align-items-center gap-3 text-decoration-none mb-1 <?= $currentPage == 'productos.php' ? 'active' : '' ?>">
-                <i class="bi bi-box-seam"></i>
+                <i class="fa-solid fa-box"></i>
                 <span>Productos</span>
             </a>
         <?php endif; ?>
@@ -115,11 +115,11 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <?php if ($id_rol === '3' || $id_rol === 3): ?>
             <div class="text-uppercase fw-bold menu-header">Portal</div>
             <a href="../cliente/dashboard.php" class="sidebar-link d-flex align-items-center gap-3 text-decoration-none mb-1 <?= $currentPage == 'dashboard.php' ? 'active' : '' ?>">
-                <i class="bi bi-speedometer2"></i>
+                <i class="fa-solid fa-gauge-high"></i>
                 <span>Dashboard</span>
             </a>
             <a href="../cliente/compras.php" class="sidebar-link d-flex align-items-center gap-3 text-decoration-none mb-1 <?= $currentPage == 'compras.php' ? 'active' : '' ?>">
-                <i class="bi bi-bag"></i>
+                <i class="fa-solid fa-bag-shopping"></i>
                 <span>Mis Compras</span>
             </a>
         <?php endif; ?>
@@ -136,7 +136,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <span class="text-muted d-block text-truncate" style="font-size: 0.725rem;"><?= htmlspecialchars($rol_nombre) ?></span>
             </div>
             <a href="../../controllers/auth/authController.php?accion=logout" class="btn btn-sm btn-outline-danger border-0 p-1 rounded-circle d-flex align-items-center justify-content-center" title="Cerrar Sesión" style="width: 28px; height: 28px;">
-                <i class="bi bi-power fs-6"></i>
+                <i class="fa-solid fa-power-off fs-6"></i>
             </a>
         </div>
     </div>

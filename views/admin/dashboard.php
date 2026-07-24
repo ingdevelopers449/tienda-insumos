@@ -38,7 +38,7 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
         <div class="col-12 col-md-6 col-lg-3">
             <div class="card premium-card bg-white rounded-4 border-0 p-4 shadow-sm d-flex flex-row align-items-center gap-3">
                 <div class="card-icon-wrapper rounded-circle d-flex align-items-center justify-content-center text-success bg-success bg-opacity-10" style="width: 56px; height: 56px;">
-                    <i class="bi bi-people fs-4"></i>
+                    <i class="fa-solid fa-users fs-4"></i>
                 </div>
                 <div>
                     <span class="text-muted small fw-medium d-block">Clientes</span>
@@ -51,7 +51,7 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
         <div class="col-12 col-md-6 col-lg-3">
             <div class="card premium-card bg-white rounded-4 border-0 p-4 shadow-sm d-flex flex-row align-items-center gap-3">
                 <div class="card-icon-wrapper rounded-circle d-flex align-items-center justify-content-center text-warning bg-warning bg-opacity-10" style="width: 56px; height: 56px;">
-                    <i class="bi bi-person-badge fs-4"></i>
+                    <i class="fa-solid fa-user-tie fs-4"></i>
                 </div>
                 <div>
                     <span class="text-muted small fw-medium d-block">Vendedores</span>
@@ -64,7 +64,7 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
         <div class="col-12 col-md-6 col-lg-3">
             <div class="card premium-card bg-white rounded-4 border-0 p-4 shadow-sm d-flex flex-row align-items-center gap-3">
                 <div class="card-icon-wrapper rounded-circle d-flex align-items-center justify-content-center text-primary bg-primary bg-opacity-10" style="width: 56px; height: 56px;">
-                    <i class="bi bi-box-seam fs-4"></i>
+                    <i class="fa-solid fa-box fs-4"></i>
                 </div>
                 <div>
                     <span class="text-muted small fw-medium d-block">Productos</span>
@@ -77,7 +77,7 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
         <div class="col-12 col-md-6 col-lg-3">
             <div class="card premium-card bg-white rounded-4 border-0 p-4 shadow-sm d-flex flex-row align-items-center gap-3">
                 <div class="card-icon-wrapper rounded-circle d-flex align-items-center justify-content-center text-danger bg-danger bg-opacity-10" style="width: 56px; height: 56px;">
-                    <i class="bi bi-cart3 fs-4"></i>
+                    <i class="fa-solid fa-shopping-cart fs-4"></i>
                 </div>
                 <div>
                     <span class="text-muted small fw-medium d-block">Pedidos</span>
@@ -96,25 +96,25 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
                 <div class="row g-3">
                     <div class="col-6">
                         <a href="usuarios.php" class="premium-list-item d-flex flex-column align-items-center gap-2 p-3 border rounded-3 text-decoration-none transition">
-                            <i class="bi bi-person-plus text-primary fs-3"></i>
+                            <i class="fa-solid fa-user-plus text-primary fs-3"></i>
                             <span class="small fw-semibold text-dark">Nuevo Usuario</span>
                         </a>
                     </div>
                     <div class="col-6">
                         <a href="productos.php" class="premium-list-item d-flex flex-column align-items-center gap-2 p-3 border rounded-3 text-decoration-none transition">
-                            <i class="bi bi-box-seam text-success fs-3"></i>
+                            <i class="fa-solid fa-box text-success fs-3"></i>
                             <span class="small fw-semibold text-dark">Productos</span>
                         </a>
                     </div>
                     <div class="col-6">
                         <a href="categorias.php" class="premium-list-item d-flex flex-column align-items-center gap-2 p-3 border rounded-3 text-decoration-none transition">
-                            <i class="bi bi-tags text-warning fs-3"></i>
+                            <i class="fa-solid fa-tags text-warning fs-3"></i>
                             <span class="small fw-semibold text-dark">Categorías</span>
                         </a>
                     </div>
                     <div class="col-6">
                         <a href="proveedores.php" class="premium-list-item d-flex flex-column align-items-center gap-2 p-3 border rounded-3 text-decoration-none transition">
-                            <i class="bi bi-truck text-danger fs-3"></i>
+                            <i class="fa-solid fa-truck-fast text-danger fs-3"></i>
                             <span class="small fw-semibold text-dark">Proveedores</span>
                         </a>
                     </div>
@@ -136,14 +136,14 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
                     </div>
                     <div class="d-flex align-items-center justify-content-between p-3 bg-light rounded-3">
                         <div class="d-flex align-items-center gap-3">
-                            <i class="bi bi-clock text-muted"></i>
+                            <i class="fa-solid fa-clock text-muted"></i>
                             <span class="fw-semibold text-dark small">Hora del Servidor</span>
                         </div>
                         <span class="text-muted small"><?= date('H:i:s d/m/Y') ?></span>
                     </div>
                     <div class="d-flex align-items-center justify-content-between p-3 bg-light rounded-3">
                         <div class="d-flex align-items-center gap-3">
-                            <i class="bi bi-shield-lock text-muted"></i>
+                            <i class="fa-solid fa-shield-halved text-muted"></i>
                             <span class="fw-semibold text-dark small">Nivel de Acceso</span>
                         </div>
                         <span class="badge bg-primary-subtle text-primary border border-primary border-opacity-10 fw-bold px-2.5 py-1.5" style="font-size: 0.75rem;">ADMINISTRADOR</span>
