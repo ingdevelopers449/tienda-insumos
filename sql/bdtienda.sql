@@ -10,7 +10,7 @@ CREATE TABLE `usuarios` (
   `email` varchar(100) UNIQUE NOT NULL,
   `password` varchar(255) NOT NULL,
   `id_rol` int NOT NULL,
-  `estado` boolean DEFAULT true,
+  `estado` varchar(50) DEFAULT 'Activo',
   `fecha_creacion` datetime
 );
 

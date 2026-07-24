@@ -11,7 +11,7 @@ class Usuario
         $this->conn = $conn;
     }
 
-    public function registrar($usuario, $email, $password, $id_rol = 3, $estado = 1)
+    public function registrar($usuario, $email, $password, $id_rol = 3, $estado = 'Activo')
     {
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
@@ -19,7 +19,7 @@ class Usuario
 
         $stmt = $this->conn->prepare($query);
         if ($stmt) {
-            $stmt->bind_param('sssii', $usuario, $email, $hashed_password, $id_rol, $estado);
+            $stmt->bind_param('sssis', $usuario, $email, $hashed_password, $id_rol, $estado);
             $result = $stmt->execute();
             $stmt->close();
             return $result;
@@ -75,8 +75,8 @@ class Usuario
     public function obtenerEstados()
     {
         return [
-            1 => 'Activo',
-            0 => 'Inactivo'
+            'Activo' => 'Activo',
+            'Inactivo' => 'Inactivo'
         ];
     }
 }
