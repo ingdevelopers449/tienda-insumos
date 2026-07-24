@@ -223,6 +223,14 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
                                 <?php endforeach; ?>
                             </select>
                         </div>
+                        <label class="form-label text-secondary small fw-bold">Estado *</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-toggle-on"></i></span>
+                            <select name="estado" id="estadoSelect" required class="form-select bg-white">
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer border-top border-light p-4">
@@ -289,6 +297,16 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
                             </select>
                         </div>
                     </div>
+                    <div>
+                        <label class="form-label text-secondary small fw-bold">Estado *</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-toggle-on"></i></span>
+                            <select name="estado" id="edit_estado" required class="form-select bg-white">
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer border-top border-light p-4">
                     <button type="button" class="btn btn-light rounded-3" data-bs-dismiss="modal">Cancelar</button>
@@ -327,6 +345,7 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
         document.getElementById('edit_apellidos').value = usuario.apellidos || '';
         document.getElementById('edit_email').value = usuario.email;
         document.getElementById('edit_rol').value = usuario.id_rol;
+        document.getElementById('edit_estado').value = usuario.estado;
         
         var editModal = new bootstrap.Modal(document.getElementById('modalEditar'));
         editModal.show();

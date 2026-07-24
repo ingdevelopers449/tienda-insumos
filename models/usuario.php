@@ -11,15 +11,15 @@ class Usuario
         $this->conn = $conn;
     }
 
-    public function registrar($usuario, $email, $password, $id_rol = 3)
+    public function registrar($usuario, $email, $password, $id_rol = 3, $estado = 1)
     {
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
-        $query = 'INSERT INTO usuarios (usuario, email, password, id_rol) VALUES (?, ?, ?, ?)';
+        $query = 'INSERT INTO usuarios (usuario, email, password, id_rol, estado) VALUES (?, ?, ?, ?, ?)';
 
         $stmt = $this->conn->prepare($query);
         if ($stmt) {
-            $stmt->bind_param('sssi', $usuario, $email, $hashed_password, $id_rol);
+            $stmt->bind_param('sssii', $usuario, $email, $hashed_password, $id_rol, $estado);
             $result = $stmt->execute();
             $stmt->close();
             return $result;
@@ -44,7 +44,7 @@ class Usuario
 
     public function obtenerPorEmail($email)
     {
-        $query = 'SELECT id_usuario, usuario, email, password, id_rol FROM usuarios WHERE email = ?';
+        $query = 'SELECT id_usuario, usuario, email, password, id_rol, estado FROM usuarios WHERE email = ?';
         $stmt = $this->conn->prepare($query);
         if ($stmt) {
             $stmt->bind_param('s', $email);
