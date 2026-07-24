@@ -71,5 +71,13 @@ class Usuario
         }
         return $usuarios;
     }
+
+    public function obtenerEstados()
+    {
+        return [
+            1 => 'Activo',
+            0 => 'Inactivo'
+        ];
+    }
 }
 ?>

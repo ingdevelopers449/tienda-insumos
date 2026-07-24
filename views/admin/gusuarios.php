@@ -12,6 +12,7 @@ require_once __DIR__ . '/../../models/rol.php';
 
 $usuarioModel = new Usuario();
 $usuarios = $usuarioModel->obtenerTodos();
+$estados = $usuarioModel->obtenerEstados();
 
 $rolModel = new Rol();
 $roles = $rolModel->obtenerTodos();
@@ -227,8 +228,10 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
                         <div class="input-group">
                             <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-toggle-on"></i></span>
                             <select name="estado" id="estadoSelect" required class="form-select bg-white">
-                                <option value="1">Activo</option>
-                                <option value="0">Inactivo</option>
+                                <option value="">Seleccione un estado...</option>
+                                <?php foreach ($estados as $val => $texto): ?>
+                                    <option value="<?= htmlspecialchars($val) ?>"><?= htmlspecialchars($texto) ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
@@ -302,8 +305,10 @@ require_once __DIR__ . '/../layouts/sidebaradmin.php';
                         <div class="input-group">
                             <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-toggle-on"></i></span>
                             <select name="estado" id="edit_estado" required class="form-select bg-white">
-                                <option value="1">Activo</option>
-                                <option value="0">Inactivo</option>
+                                <option value="">Seleccione un estado...</option>
+                                <?php foreach ($estados as $val => $texto): ?>
+                                    <option value="<?= htmlspecialchars($val) ?>"><?= htmlspecialchars($texto) ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
